@@ -27,5 +27,5 @@ const handleFormInputFocus = async () => {
     renderMealCategories(mealCategoriesObj);
 };
 
-
+// add event listener to search term input
 searchTermsInput.addEventListener("focus", handleFormInputFocus);
