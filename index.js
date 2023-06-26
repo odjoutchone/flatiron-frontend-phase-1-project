@@ -1,4 +1,4 @@
-console.log("index.js connected")
+console.log("index.js connected");
 
 const searchTermsInput = document.body.querySelector("#search-terms")
 
