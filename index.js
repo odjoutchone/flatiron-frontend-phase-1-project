@@ -19,9 +19,12 @@ const getMealCategories = async () => {
     }
 }
 
+// function to call when the form input is giving focus
 const handleFormInputFocus = async () => {
-    console.log('focus accurred')
-    await getMealCategories();
+    console.log('focus accurred');
+
+    const mealCategoriesObj = await getMealCategories();
+    renderMealCategories(mealCategoriesObj);
 };
 
 
