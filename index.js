@@ -1,77 +1,57 @@
-console.log("index.js connected");
-
-// get search field input
-const searchTermsInput = document.body.querySelector("#search-terms");
-
-// fectch meal categories from themealdb Api
-const getMealCategories = async () => {
-    const mealCategoriesApiURL = "https://www.themealdb.com/api/json/v1/1/categories.php";
-
-    try{
-        const response = await fetch(mealCategoriesApiURL);
-        const data = await response.json();
-        const categories = data.categories;
-        console.log(`categories: `, categories);
-        return categories;
-    }   catch(error) {
-        console.log(error);
-        alert("Something went wrong, try again later");
-    }
-}
-
-// render meal categories data to dom
-const renderMealCategories = (mealCategoriesArray) => {
-    console.log('renderMealCategories');
-    console.table(mealCategoriesArray);
-// find and select a UL with meal categories ID dom element to append my data into
- const mealCategoriesList = document.body.querySelector('#meal-categories-list')
-  
- mealCategoriesArray.forEach(mealCategory =>{
-    // create wrapping list item
-    const mealCategoryListItem = document.createElement('li')
-    mealCategoryListItem.className = 'meal-category-card'
-    // appendChild the li.card to select DOM element
-    mealCategoriesList.appendChild(mealCategoryListItem)
-  // display the category name, image and description
-     // image
-     // create an img element
-         const mealCategoryImg = document.createElement('img')
-        // set img src to category thumbnail url
-           mealCategoryImg.src = mealCategory.strCategoryThumb
-        // give it a mobile friendly max width like 300px
-           mealCategoryImg.width = 300
-        // appendChild the image to our card
-           mealCategoryListItem.appendChild(mealCategoryImg)
-
-     // name
-     // create an h4 element
-         const mealCategoryName = document.createElement('h4')
-        
-        // set h4 element textContent to be meal category name
-           mealCategoryName.textContent = mealCategory.strCategoryName
-        // appendChild the h4 to our card
-           mealCategoryListItem.appendChild(mealCategoryName)
-
-
-    // description
-    // create an p element
-    const mealCategoryDescription = document.createElement('p')
-      // set p element textContent to be meal category description  
-         mealCategoryDescription.textContent = mealCategory.strCategoryDescription
-      // appendChild the p to our card
-        mealCategoryListItem.appendChild(mealCategoryDescription)
-
- })
-
-}
-
-// function to call when the form input is giving focus
-const handleFormInputFocus = async () => {
-    console.log('focus accurred');
-
-    const mealCategoriesObj = await getMealCategories();
-    renderMealCategories(mealCategoriesObj);
+let result = document.getElementById("result");
+let searchBtn = document.getElementById("search-btn");
+let url = "https://themealdb.com/api/json/v1/1/search.php?s=";
+let getInfo = () => {
+  let userInp = document.getElementById("user-inp").value;
+  if (userInp.length == 0) {
+    result.innerHTML = `<h3 class="msg">The input field cannot be empty</h3>`;
+  } else {
+    fetch(url + userInp)
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("user-inp").value = "";
+        console.log(data);
+        console.log(data.meals[0]);
+        let myMeal = data.meals[0];
+        console.log(myMeal.strMeal);
+        console.log(myMeal.strMealThumb);
+        console.log(myMeal.strInstructions);
+        let count = 1;
+        let ingredients = [];
+        for (let i in myMeal) {
+          let ingredient = "";
+          let measure = "";
+          if (i.startsWith("strIngredient") && myMeal[i]) {
+            ingredient = myMeal[i];
+            if (myMeal[`strMeasure` + count]) {
+              measure = myMeal[`strMeasure` + count];
+            } else {
+              measure = "";
+            }
+            count += 1;
+            ingredients.push(`${measure} ${ingredient}`);
+          }
+        }
+        console.log(ingredients);
+        result.innerHTML = `
+      <img src=${myMeal.strMealThumb}>
+      <h2>${myMeal.strMeal}</h2>
+      <h3>Ingredients:</h3>
+      <ul class="ingredients"></ul>
+      <h3>Instructions:</h3>
+      <p>${myMeal.strInstructions}</p>
+      `;
+        let ingredientsCon = document.querySelector(".ingredients");
+        ingredients.forEach((item) => {
+          let listItem = document.createElement("li");
+          listItem.innerText = item;
+          ingredientsCon.appendChild(listItem);
+        });
+      })
+      .catch(() => {
+        result.innerHTML = `<h3 class="msg">Please enter a valid input</h3>`;
+      });
+  }
 };
-
-// add event listener to search term input
-searchTermsInput.addEventListener("focus", handleFormInputFocus);
+window.addEventListener("load", getInfo);
+searchBtn.addEventListener("click", getInfo);
