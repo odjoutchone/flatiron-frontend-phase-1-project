@@ -1,4 +1,98 @@
-body{
-   background-color: lightblue;
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+html {
+   font-family: "Poppins", sans-serif;
+   background-color: rgb(225, 234, 239);
 }
+
+.header {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.main-title {
+   cursor: pointer;
+}
+
+.meal-container {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+   grid-gap: 2rem;
+   justify-content: center;
+   margin: 30px;
+}
+
+.selection-heading {
+   margin-left: 30px;
+ }
+
+ .meal-title {
+   text-align: center;
+   padding: 2px 16px;
+}
+
+/* Recipe Details Card Styling */
+.recipe-details-container {
+   max-width: 90%;
+   margin: 50px auto;
+   padding: 10px;
+   border-radius: 15px;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+   display: grid;
+   grid-template-columns: 1 1fr;
+   grid-template-areas:
+      "title"
+      "image"
+      "image"
+      "ingredients"
+      "directions"
+      "resources";
+}
+
+@media screen and (min-width: 800px) {
+   .recipe-details-container {
+      max-width: 70%;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas:
+         "title image image"
+         "title image image"
+         "ingredients directions directions"
+         "resources resources resources";
+   }
+}
+
+.meal-details-container > * {
+   padding: 30px;
+}
+
+.meal-details-title {
+   font-size: 30px;
+   grid-area: title;
+   display: flex;
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+}
+.meal-details-image {
+   grid-area: image;
+}
+
+.meal-details-image img {
+   border-radius: 20px;
+}
+
+.meal-details-ingredients {
+   font-size: larger;
+   grid-area: ingredients;
+}
+
+.meal-details-directions {
+   font-size: larger;
+   grid-area: directions;
+}
+
+.meal-details-resources {
+   grid-area: resources;
+}
+

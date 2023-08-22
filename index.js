@@ -41,11 +41,11 @@ let getInfo = () => {
       <h3>Instructions:</h3>
       <p>${myMeal.strInstructions}</p>
       `;
-        let ingredientsCon = document.querySelector(".ingredients");
+        let ingredientsConcoction = document.querySelector(".ingredients");
         ingredients.forEach((item) => {
           let listItem = document.createElement("li");
           listItem.innerText = item;
-          ingredientsCon.appendChild(listItem);
+          ingredientsConcoction.appendChild(listItem);
         });
       })
       .catch(() => {
