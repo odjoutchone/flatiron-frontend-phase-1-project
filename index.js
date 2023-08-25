@@ -19,6 +19,7 @@ let getMeal = () => {
         console.log(myMeal.strMeal);
         console.log(myMeal.strMealThumb);
         console.log(myMeal.strInstructions);
+        
         // Resource Area
         let count = 1;
         let ingredients = [];
