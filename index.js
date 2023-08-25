@@ -1,6 +1,9 @@
-let result = document.getElementById("result");
-let searchBtn = document.getElementById("search-btn");
+// Elements
+const result = document.getElementById("result");
+const searchBtn = document.getElementById("search-btn");
 let url = "https://themealdb.com/api/json/v1/1/search.php?s=";
+
+// Meal Collection Function
 let getMeal = () => {
   let userInp = document.getElementById("user-inp").value;
   if (userInp.length == 0) {
@@ -41,9 +44,9 @@ let getMeal = () => {
       <h3>Instructions:</h3>
       <p>${myMeal.strInstructions}</p>
       `;
-        let ingredientsConcoction = document.querySelector(".ingredients");
+      let ingredientsConcoction = document.querySelector(".ingredients");
         ingredients.forEach((item) => {
-          let listItem = document.createElement("li");
+          const listItem = document.createElement("li");
           listItem.innerText = item;
           ingredientsConcoction.appendChild(listItem);
         });
