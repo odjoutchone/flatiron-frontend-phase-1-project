@@ -19,7 +19,7 @@ let getMeal = () => {
         console.log(myMeal.strMeal);
         console.log(myMeal.strMealThumb);
         console.log(myMeal.strInstructions);
-        
+
         // Resource Area
         let count = 1;
         let ingredients = [];
@@ -58,6 +58,7 @@ let getMeal = () => {
       });
   }
 };
+
 // Event Listeners
 window.addEventListener("load", getMeal);
 searchBtn.addEventListener("click", getMeal);
