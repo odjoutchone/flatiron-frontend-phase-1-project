@@ -56,5 +56,6 @@ let getMeal = () => {
       });
   }
 };
+// Event Listeners
 window.addEventListener("load", getMeal);
 searchBtn.addEventListener("click", getMeal);
