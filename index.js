@@ -1,9 +1,8 @@
 // Elements
 const result = document.getElementById("result");
 const searchBtn = document.getElementById("search-btn");
-let url = "https://themealdb.com/api/json/v1/1/search.php?s=";
-
 // Meal Collection Function
+let url = "https://themealdb.com/api/json/v1/1/search.php?s=";
 let getMeal = () => {
   let userInp = document.getElementById("user-inp").value;
   if (userInp.length == 0) {
